@@ -1,0 +1,182 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+  <h3>Add a manager</h3>
+</div>
+
+<div class="container mt-3">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="container">
+        <form class="" action="/new_tournament/<%=country%>/<%=cup%>/customize" method="post">
+
+          <div class="container">
+            <h4>Create a new manager</h4>
+          </div>
+          <div class="container">
+            <div id="add-player" class="w3-cell w3-btn w3-tiny w3-dark-grey w3-ripple w3-round">Create</div>
+          </div><br>
+
+          <div class="container">
+          </div>
+          <div id="displayName" class="container"></div>
+          <div id="added-player" class=""></div><br>
+
+          <div class="container">
+            <h4>Use an existing manager</h4>
+          </div>
+
+          <div class="container">
+            <h5>manager list</h5>
+            <hr>
+          </div>
+
+          <% for(let player of players){ %>
+            <div class="container">
+              <div class="w3-btn w3-ripple">
+                <img src="<%=player.img%>" alt="" style="width:100%;">
+                <div class="">
+                  <div><%=player.name%></div>
+                  <div class="w3-tiny">record</div>
+                  <div class="w3-tiny"><span><%=player.wins%></span> - <span><%=player.draws%></span> - <span><%=player.losses%></span></div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          <div class="container">
+            <hr>
+          </div>
+
+          <button class="w3-right btn btn-primary" type="submit" name="button">next</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<script type="text/javascript">
+let count = 0;
+const addPlayer = document.querySelector("#add-player");
+addPlayer.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  // create a container to hold te input and button we are about to create
+  const container = document.createElement('div');
+  container.setAttribute('class', "container");
+  container.setAttribute('id', `player-container${count}`);
+
+  //create the input -- give it a name of "player" + whatever count is
+  const inputName = document.createElement('input');
+  inputName.setAttribute('class', 'w3-input w3-cell');
+  inputName.setAttribute('name', `playerName`);
+  inputName.setAttribute('placeholder', "enter manager's name");
+  inputName.style.width = "60%"
+  // update player count
+  count++;
+
+  //create a input for the player's icon string to be held in
+  const inputIcon = document.createElement('input');
+  inputIcon.setAttribute('class', 'w3-input w3-cell');
+  inputIcon.setAttribute('name', `playerIcon`);
+  inputIcon.setAttribute('autofocus', '');
+  inputIcon.style.width = "60%";
+  inputIcon.style.display = "none";
+
+  const iconDiv = document.createElement('div');
+  iconDiv.setAttribute('class', '');
+
+  const img1Div = document.createElement('div');
+  img1Div.setAttribute('class', 'w3-cell')
+
+  const img2Div = document.createElement('div');
+  img2Div.setAttribute('class', 'w3-cell')
+
+  const img3Div = document.createElement('div');
+  img3Div.setAttribute('class', 'w3-cell')
+
+  const img4Div = document.createElement('div');
+  img4Div.setAttribute('class', 'w3-cell')
+
+
+  const img1 = document.createElement('img');
+  img1.setAttribute("src", "/images/managers/all_business.png");
+  img1.setAttribute("class", "w3-btn w3-ripple w3-round w3-border");
+  img1.style.width = "100%";
+  img1.addEventListener("onclick", () => {
+    img1Div.style.backgroundColor = "grey";
+  })
+  img1Div.appendChild(img1);
+
+  const img2 = document.createElement('img');
+  img2.setAttribute("src", "/images/managers/footballing_genius.png");
+  img2.setAttribute("class", "w3-btn w3-ripple w3-round w3-border");
+  img2.style.width = "100%";
+  img2.addEventListener("onclick", () => {
+    img2Div.style.backgroundColor = "grey";
+  })
+  img2Div.appendChild(img2);
+
+  const img3 = document.createElement('img');
+  img3.setAttribute("src", "/images/managers/hip_manager.png");
+  img3.setAttribute("class", "w3-btn w3-ripple w3-round w3-border");
+  img3.style.width = "100%";
+  img3.addEventListener("onclick", () => {
+    img3Div.style.backgroundColor = "black";
+  })
+  img3Div.appendChild(img3);
+
+  const img4 = document.createElement('img');
+  img4.setAttribute("src", "/images/managers/solid_oak.png");
+  img4.setAttribute("class", "w3-btn w3-ripple w3-round w3-border");
+  img4.style.width = "100%";
+  img4.addEventListener("onclick", () => {
+    img4Div.style.backgroundColor = "grey";
+  })
+  img4Div.appendChild(img4);
+
+  // create a delete button in case the user wants to delete the player completely
+  const delbtn = document.createElement('div');
+  delbtn.setAttribute('class', 'w3-cell w3-btn w3-ripple w3-tiny w3-right');
+  delbtn.style.color = "red";
+  delbtn.innerText = 'del';
+  delbtn.addEventListener('click', () => {
+    count--;
+    const delPlayer = document.querySelector(`#player-container${count}`);
+    delPlayer.remove();
+  })
+
+  const iconHeader = document.createElement('h5')
+  iconHeader.innerText = "Pick manager's icon";
+
+  const iconName = document.createElement('h5')
+  iconName.innerText = "Pick manager's name";
+
+
+  // append all the created elements together and then append that to the
+  //addedPlayer div right under the add player button in the form
+  const addedPlayer = document.querySelector("#added-player");
+
+  iconDiv.appendChild(iconHeader)
+  iconDiv.appendChild(img1Div)
+  iconDiv.appendChild(img2Div)
+  iconDiv.appendChild(img3Div)
+  iconDiv.appendChild(img4Div)
+
+  container.appendChild(iconDiv);
+  container.appendChild(iconName);
+  container.appendChild(inputName); //append the delete button to the container
+  container.appendChild(inputIcon); //append the delete button to the container
+  container.appendChild(delbtn) //append the input to the container
+
+
+  addedPlayer.appendChild(container); //append the container to the div
+
+})
+</script>
+
+<%- include('partials/footer') -%>

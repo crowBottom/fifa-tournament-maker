@@ -1,0 +1,17 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+  <h3>Fifa Tournament Cup List</h3>
+</div>
+
+<% for(let cup of cups.cups) { %>
+  <button class="btn" style="width:48%;">
+    <h5><%=cup.name%></h5>
+    <a href="/new_tournament/<%=cups.name%>/<%=cup.name%>/players">
+      <img class="img-fluid" src="<%=cup.img%>" alt="" style="border: solid black">
+    </a>
+  </button>
+<% } %>
+
+
+<%- include('partials/footer') -%>

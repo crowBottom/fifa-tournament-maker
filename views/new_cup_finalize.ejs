@@ -1,0 +1,72 @@
+<%- include('partials/header') -%>
+
+<div class="container center">
+  <div class="">
+    <h3><b><%=cup.name%></b></h3>
+  </div>
+  <div>
+    <img src="<%=cup.img_banner%>" alt="" class="w3-border w3-round" style="width: 100%;">
+  </div>
+  <div class="">
+    <h5><b>Players</b></h5>
+    <% for(let player of cup.players){ %>
+      <div class="">
+        <div><%=player.name%></div>
+      </div>
+    <% } %>
+  </div>
+</div>
+<form class="" action="/new_tournament/save/<%=cup._id%>" method="post">
+  <div class="container">
+    <h5><b>Fixture List for starting round</b></h5>
+    <% for(let fixture of cup.starting_round){ %>
+    <div class="w3-border w3-round">
+      <div class="row">
+        <div class="col">
+          <div class="w3-cell">
+            <img src="<%=fixture.home_img%>" alt="">
+          </div>
+          <div class="w3-cell">
+            <div><%=fixture.home_club%></div>
+          </div>
+        </div>
+        <div class="col w3-tiny w3-padding">
+          <select class="w3-select" name="home_option">
+            <option value="<%=fixture.home_tag%>"><%=fixture.home_tag%></option>
+            <option value="<%=fixture.away_tag%>"><%=fixture.away_tag%></option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="w3-cell">
+            <img src="<%=fixture.away_img%>" alt="">
+          </div>
+          <div class="w3-cell">
+            <div><%=fixture.away_club%></div>
+          </div>
+        </div>
+        <div class="col w3-tiny w3-padding">
+          <select class="w3-select" name="away_option">
+            <option value="<%=fixture.away_tag%>"><%=fixture.away_tag%></option>
+            <option value="<%=fixture.home_tag%>"><%=fixture.home_tag%></option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <div class="w3-right">
+    <button class="w3-btn w3-ripple w3-round w3-ripple" type="submit" name="button">Start Cup</button>
+  </div>
+</form>
+
+
+
+
+
+<%- include('partials/footer') -%>
+
+
+
+<%- include('partials/footer') -%>

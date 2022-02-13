@@ -1,0 +1,23 @@
+<%- include('partials/header') -%>
+
+<div class="container w3-center">
+  <div class="w3-xlarge"><b>Fifa Tournament Customized Cups List</b></div>
+</div>
+
+<div class="container">
+  <% for(let cup of cups){ %>
+    <a href="/customized_tournaments/details/<%=cup._id%>">
+      <div class="w3-btn w3-ripple w3-border w3-round" style="max-width:49%;">
+        <div class=""><b><%=cup.name%></b></div>
+        <div class="">
+          <img src="<%=cup.img%>" alt="" style="width:100%">
+        </div>
+        <div class="w3-cointainer w3-tiny w3-center">
+          <div><%=cup.date%></div>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<%- include('partials/footer') -%>

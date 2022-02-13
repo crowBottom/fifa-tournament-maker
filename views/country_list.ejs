@@ -1,0 +1,19 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+  <h3>Fifa Tournament Countries List</h3>
+</div>
+
+<div class="container centered">
+  <% for(let country of countries) { %>
+    <button class="btn" style="width:48%;">
+      <h5><%=country.name%></h5>
+      <a href="/new_tournament/<%=country.name%>/cups">
+        <img class="img-fluid" src="<%=country.img%>" alt="" style="border: solid black">
+      </a>
+    </button>
+  <% } %>
+</div>
+
+
+<%- include('partials/footer') -%>
